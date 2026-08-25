@@ -5,6 +5,7 @@ import {
   InvestigationReport,
   RiskAlert,
   DashboardMetrics,
+  MLModelMetrics,
   ChatMessage,
 } from '../../shared/types';
 
@@ -20,6 +21,18 @@ export const api = {
   async getDashboardMetrics(): Promise<DashboardMetrics> {
     const res = await fetch(`${BASE_URL}/dashboard/metrics`);
     if (!res.ok) throw new Error('Failed to load dashboard metrics');
+    return res.json();
+  },
+
+  async getMLModelMetrics(): Promise<MLModelMetrics> {
+    const res = await fetch(`${BASE_URL}/ml/metrics`);
+    if (!res.ok) throw new Error('Failed to load ML model metrics');
+    return res.json();
+  },
+
+  async getMLModelStatus(): Promise<{ status: 'ACTIVE' | 'FALLBACK'; version: string; sampleCount: number }> {
+    const res = await fetch(`${BASE_URL}/ml/status`);
+    if (!res.ok) throw new Error('Failed to load ML model status');
     return res.json();
   },
 

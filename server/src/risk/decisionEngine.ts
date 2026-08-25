@@ -20,8 +20,8 @@ export class DecisionEngine {
     const behavioralFeatures = BehavioralEngine.extractBehavioralFeatures(tx, user, userTransactions);
     const behaviorScore = behavioralFeatures.behavioralAnomalyScore;
 
-    // 3. ML-Ready Predictive Scoring
-    const mlBreakdown = MLRiskModel.predict(tx, user, behavioralFeatures, ruleScore);
+    // 3. ML Predictive Scoring
+    const mlBreakdown = MLRiskModel.predict(tx, user, behavioralFeatures, ruleScore, userTransactions);
     const mlScore = mlBreakdown.mlRawScore;
 
     // 4. Final Weighted Risk Calculation

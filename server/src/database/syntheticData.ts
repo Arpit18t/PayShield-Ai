@@ -119,6 +119,23 @@ export const INITIAL_USERS: UserProfile[] = [
     failedTransactionsCountLast30Days: 0,
     riskTier: 'STANDARD',
     createdDate: '2025-10-15T15:20:00Z',
+  },
+  {
+    id: 'U6001',
+    name: 'Devendra Singhania (Scenario 6)',
+    email: 'd.singhania@example.com',
+    phone: '+91 98200 99881',
+    accountAgeDays: 520,
+    historicalAverageAmount: 75000,
+    historicalMaxAmount: 180000,
+    usualLocation: 'Mumbai, India',
+    usualDevice: 'DEV701',
+    knownDevices: ['DEV701', 'DEV702'],
+    knownLocations: ['Mumbai, India', 'Thane, India'],
+    totalTransactionsCount: 198,
+    failedTransactionsCountLast30Days: 0,
+    riskTier: 'STANDARD',
+    createdDate: '2025-03-10T11:00:00Z',
   }
 ];
 
@@ -439,6 +456,22 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
     deviceType: 'Android 14 / Chrome',
     ipAddress: '157.34.88.19',
     timestamp: daysAgo(3.5),
+    status: 'SUCCESS',
+  },
+  // Scenario 6: Legitimate High-Value Transaction for Established Affluent User
+  {
+    id: 'TXN10062',
+    userId: 'U6001',
+    amount: 72500, // Large ₹72.5k amount, but user baseline is ₹75k (Ratio 0.97x)
+    currency: 'INR',
+    paymentMethod: 'CREDIT_CARD',
+    merchant: 'Luxury Lifestyle Apparel',
+    merchantCategory: 'Luxury Retail',
+    location: 'Mumbai, India', // Known location
+    deviceId: 'DEV701', // Known verified device
+    deviceType: 'MacBook Pro / Safari 18',
+    ipAddress: '103.24.120.88',
+    timestamp: hoursAgo(6),
     status: 'SUCCESS',
   }
 ];

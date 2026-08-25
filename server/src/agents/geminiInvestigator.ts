@@ -179,7 +179,7 @@ Provide your response in valid JSON matching this exact structure:
 }`;
 
       const aiCallPromise = ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.7-flash',
         contents: prompt,
         config: {
           responseMimeType: 'application/json',
@@ -208,7 +208,7 @@ Provide your response in valid JSON matching this exact structure:
         confidence: typeof parsed.confidence === 'number' ? parsed.confidence : 92,
         recommendedAction: parsed.recommendedAction || 'Conduct manual review',
         engineType: 'GEMINI_AI',
-        modelUsed: 'gemini-2.5-flash',
+        modelUsed: 'gemini-3.7-flash',
         createdAt: new Date().toISOString(),
       };
     } catch (err) {

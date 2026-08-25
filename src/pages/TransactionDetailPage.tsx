@@ -10,6 +10,7 @@ import { RiskBadge, DecisionBadge } from '../components/StatusBadge';
 import { RiskScoreGauge } from '../components/RiskScoreGauge';
 import { RiskFactorsTable } from '../components/RiskFactorsTable';
 import { BehavioralAnomalyCard } from '../components/BehavioralAnomalyCard';
+import { MLRiskAssessmentCard } from '../components/MLRiskAssessmentCard';
 import { AIInvestigationCard } from '../components/AIInvestigationCard';
 import { AnalystChatPanel } from '../components/AnalystChatPanel';
 import {
@@ -258,6 +259,15 @@ export const TransactionDetailPage: React.FC<TransactionDetailPageProps> = ({
 
       {/* Deterministic Rule Engine Breakdown ("Why was this flagged?") */}
       <RiskFactorsTable rules={riskAnalysis.allRules} />
+
+      {/* Machine Learning Risk Model Assessment & Explainability */}
+      <MLRiskAssessmentCard
+        mlBreakdown={riskAnalysis.mlBreakdown}
+        ruleScore={riskAnalysis.ruleScore}
+        behaviorScore={riskAnalysis.behaviorScore}
+        mlScore={riskAnalysis.mlScore}
+        finalScore={riskAnalysis.finalScore}
+      />
 
       {/* Device & Location Intelligence Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

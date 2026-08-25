@@ -16,8 +16,10 @@ router.get('/transactions/:id', RiskController.getTransactionById);
 // Users
 router.get('/users/:id', RiskController.getUserById);
 
-// Risk Engine
+// Risk Engine & ML
 router.get('/risk/:transactionId', RiskController.getRiskByTransactionId);
+router.get('/ml/metrics', RiskController.getMLModelMetrics);
+router.get('/ml/status', RiskController.getMLModelStatus);
 
 // Alerts
 router.get('/alerts', RiskController.getAlerts);

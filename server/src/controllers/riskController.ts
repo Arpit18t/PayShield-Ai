@@ -3,6 +3,7 @@ import { db } from '../database/db';
 import { DecisionEngine } from '../risk/decisionEngine';
 import { GeminiInvestigator } from '../agents/geminiInvestigator';
 import { AnalystChatAgent } from '../agents/analystChat';
+import { MLRiskService } from '../ml/mlService';
 import { DashboardMetrics, Transaction, RiskAnalysis } from '../../../shared/types';
 
 export class RiskController {
@@ -64,6 +65,8 @@ export class RiskController {
     }
 
     const total = transactions.length || 1;
+    const mlMetrics = MLRiskService.getInstance().getModelMetrics();
+
     const metrics: DashboardMetrics = {
       totalTransactions: transactions.length,
       highRiskCount,
@@ -75,6 +78,7 @@ export class RiskController {
       totalVolumeINR: totalVolume,
       avgRiskScore: Math.round(totalScoreSum / total),
       highRiskRatePercent: Number(((highRiskCount / total) * 100).toFixed(1)),
+      mlMetrics,
       trends: {
         totalChangePercent: 12.4,
         highRiskChangePercent: -3.2,
@@ -84,6 +88,16 @@ export class RiskController {
     };
 
     res.json(metrics);
+  }
+
+  public static async getMLModelMetrics(_req: Request, res: Response): Promise<void> {
+    const metrics = MLRiskService.getInstance().getModelMetrics();
+    res.json(metrics);
+  }
+
+  public static async getMLModelStatus(_req: Request, res: Response): Promise<void> {
+    const status = MLRiskService.getInstance().getModelStatus();
+    res.json(status);
   }
 
   public static async getTransactions(req: Request, res: Response): Promise<void> {

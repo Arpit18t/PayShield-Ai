@@ -74,14 +74,54 @@ export interface BehavioralFeatures {
   behavioralAnomalyScore: number; // 0 to 100
 }
 
+export interface MLFeatureContribution {
+  featureName: string;
+  displayName: string;
+  featureValue: number | string;
+  weight: number; // Global feature weight / gain
+  contribution: number; // Estimated local impact (0-100)
+  description?: string;
+}
+
 export interface MLScoreBreakdown {
   mlModelVersion: string;
-  mlRawScore: number; // 0 to 100
-  featureImportances: {
-    featureName: string;
-    weight: number;
-    contribution: number;
-  }[];
+  mlProbability: number; // 0.0 to 1.0
+  mlRawScore: number; // 0 to 100 (probability * 100)
+  modelStatus: 'ACTIVE' | 'FALLBACK';
+  featureImportances: MLFeatureContribution[];
+  topContributingFeatures?: string[];
+}
+
+export interface ConfusionMatrix {
+  truePositives: number;
+  falsePositives: number;
+  trueNegatives: number;
+  falseNegatives: number;
+}
+
+export interface MLModelMetrics {
+  modelVersion: string;
+  algorithm: string;
+  trainedAt: string;
+  datasetSize: number;
+  normalCount: number;
+  riskyCount: number;
+  classDistribution: string;
+  trainingSampleCount: number;
+  testSampleCount: number;
+  featureCount: number;
+  features: string[];
+  accuracy: number;
+  precision: number;
+  recall: number;
+  f1Score: number;
+  rocAuc: number;
+  confusionMatrix: ConfusionMatrix;
+  validationMethod: string;
+  validationDisclaimer: string;
+  leakageStatus: string;
+  status: 'ACTIVE' | 'FALLBACK';
+  tradeoffNotes: string;
 }
 
 export interface RiskAnalysis {
@@ -143,6 +183,7 @@ export interface DashboardMetrics {
   totalVolumeINR: number;
   avgRiskScore: number;
   highRiskRatePercent: number;
+  mlMetrics?: MLModelMetrics;
   trends: {
     totalChangePercent: number;
     highRiskChangePercent: number;
