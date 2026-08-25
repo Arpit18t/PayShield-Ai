@@ -1,0 +1,6 @@
+{
+  "name": "PayShield AI",
+  "description": "Intelligent Payment Risk & AI Investigation Platform with Deterministic Rules, Behavioral Anomaly Scoring, and Explainable AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
